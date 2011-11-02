@@ -24,11 +24,11 @@ function [percentErrorValey percentErrorHill] = testPhase( threshold ,SOL, B , t
    end
    nrValey = length(labels) - nrHill;
    
-    fprintf('percent error hill classification ' );
-    percentErrorHill =  errorHill/ nrHill
-    errorHill
-    fprintf('error non - pedestrians classification ' );
-    percentErrorValey = errorValey/nrValey
-    errorValey
+%     fprintf('percent error hill classification ' );
+    percentErrorHill =  errorHill/ nrHill;
+%     errorHill
+%     fprintf('error non - pedestrians classification ' );
+    percentErrorValey = errorValey/nrValey;
+%     errorValey
 end
 
