@@ -1,23 +1,18 @@
 function [  ] = lrf_svm_main( )
-% main function fot the svm algortihm and hill-valey dataset
-% runs and evaluates the combination
-% percent error pedestrians classification   0.3060
-% error non - pedestrians classification     0.1780
-% total = 24.2
-
 
 
 load database\arcene\arceneValid.mat;
 load database\arcene\arceneTrain.mat;
-   
-    trainData = arceneTrain(:,2:1001);
-    trainLabels = arceneTrain(:,1);
+    percent = 0.5;
+    sizeTr = round(percent * size(arceneTrain,1))
+    trainData = arceneTrain(1:sizeTr,2:1001);
+    trainLabels = arceneTrain(1:sizeTr,1);
     for i = 1: size(trainLabels,1)
         if trainLabels(i) == 0
             trainLabels(i) =-1;
         end
     end
-    trainLabels;
+
     %training phase
     global  X;% defined for the svm algorithm 
     X = trainData; 
@@ -26,17 +21,16 @@ load database\arcene\arceneTrain.mat;
     
     % test phase   
     testingData = arceneValid(:,2:1001);
-    labelsTest = arceneValid(:,1)
+    labelsTest = arceneValid(:,1);
     hold all;
     
-    %-4:0.1:4, -400:400 the extreme values where selected running the testPhase on
-    %the training function and ploting the min and max val of f(x)
-    for i = -4: 0.1: 4
+    %-4:0.5:4, 
+    for i = -4: 0.05: 4
     [percentErrValey, percentErrHill] = testPhase(i, SOL, B,testingData, labelsTest);
     plot(percentErrValey,1 - percentErrHill,'--rs','LineWidth',2,...
                 'MarkerEdgeColor','k',...
-                'MarkerFaceColor','g',...
-                'MarkerSize',5);
+                'MarkerFaceColor','b',...
+                'MarkerSize',4);
     end
   [percentErrValey, percentErrHill] = testPhase(0, SOL, B,testingData, labelsTest)
  
